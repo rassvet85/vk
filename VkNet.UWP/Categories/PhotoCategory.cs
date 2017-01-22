@@ -228,18 +228,19 @@
 			return _vk.Call("photos.saveOwnerPhoto", parameters);
 		}
 
-		/// <summary>
-		/// Сохраняет фотографии после успешной загрузки на URI, полученный методом photos.getWallUploadServer.
-		/// </summary>
-		/// <param name="userId">Идентификатор пользователя, на стену которого нужно сохранить фотографию</param>
-		/// <param name="groupId">Идентификатор сообщества, на стену которого нужно сохранить фотографию</param>
-		/// <param name="response">Параметр, возвращаемый в результате загрузки фотографии на сервер</param>
-		/// <returns>
-		/// После успешного выполнения возвращает массив, содержащий объект с загруженной фотографией.
-		/// </returns>
-		/// <remarks>
-		/// Страница документации ВКонтакте <see href="http://vk.com/dev/photos.saveWallPhoto" />.
-		/// </remarks>		public ReadOnlyCollection<Photo> SaveWallPhoto(string response, ulong? userId = null, ulong? groupId = null)
+        /// <summary>
+        /// Сохраняет фотографии после успешной загрузки на URI, полученный методом photos.getWallUploadServer.
+        /// </summary>
+        /// <param name="userId">Идентификатор пользователя, на стену которого нужно сохранить фотографию</param>
+        /// <param name="groupId">Идентификатор сообщества, на стену которого нужно сохранить фотографию</param>
+        /// <param name="response">Параметр, возвращаемый в результате загрузки фотографии на сервер</param>
+        /// <param name="caption">Описание к отсылаемой фотографии</param>
+        /// <returns>
+        /// После успешного выполнения возвращает массив, содержащий объект с загруженной фотографией.
+        /// </returns>
+        /// <remarks>
+        /// Страница документации ВКонтакте <see href="http://vk.com/dev/photos.saveWallPhoto" />.
+        /// </remarks>        public ReadOnlyCollection<Photo> SaveWallPhoto(string response, ulong? userId = null, ulong? groupId = null, string caption = null)
 		{
 			var responseJson = JObject.Parse(response);
 			var server = responseJson["server"].ToString();
@@ -250,7 +251,8 @@
 				{ "user_id", userId },
 				{ "group_id", groupId },
 				{ "photo", photo },
-				{ "server", server },
+                { "caption", caption },
+                { "server", server },
 				{ "hash", hash }
 			};
 
